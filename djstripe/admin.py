@@ -19,7 +19,7 @@ from stripe.error import AuthenticationError, InvalidRequestError
 from . import enums, models
 
 
-def custom_display_for_JSONfield(value, field, empty_value_display):
+def custom_display_for_JSONfield(value, field, empty_value_display, **kwargs):
     """
     Overriding display_for_field to correctly render JSONField READonly fields
     in django-admin. Relevant when DJSTRIPE_USE_NATIVE_JSONFIELD is False
@@ -31,7 +31,7 @@ def custom_display_for_JSONfield(value, field, empty_value_display):
             return json.dumps(value)
         except TypeError:
             return display_for_value(value, empty_value_display)
-    return display_for_field(value, field, empty_value_display)
+    return display_for_field(value, field, empty_value_display, **kwargs)
 
 
 def admin_display_for_field_override():
